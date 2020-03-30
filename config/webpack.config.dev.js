@@ -18,6 +18,18 @@ module.exports = merge(base, {
     inline: true, // 设置热更新刷新模式为 inline
     hot: true
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader']
+      },
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+      }
+    ]
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'public/index.html',
