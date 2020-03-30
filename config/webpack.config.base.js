@@ -6,6 +6,7 @@ module.exports = {
     // 配置 code spliting，将这些公共的复用代码最终抽取成一个 chunk，单独打包出来
     framework: ['react', 'react-dom']
   },
+  devtool: 'cheap-module-eval-source-map',
   module: {
     rules: [
       {
