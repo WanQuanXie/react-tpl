@@ -12,6 +12,27 @@ module.exports = {
         test: /\.(js|jsx)$/,
         use: 'babel-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.(jpg|png|gif)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'images/',
+            limit: 8 * 1024 // 8Kb
+          }
+        }
+      },
+      {
+        test: /\.(eot|ttf|svg|woff|woff2)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name]_[hash:8].[ext]',
+            outputPath: 'font/'
+          }
+        }
       }
     ]
   }

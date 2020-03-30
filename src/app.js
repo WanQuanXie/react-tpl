@@ -2,7 +2,11 @@ import React from 'react';
 import './app.less';
 
 function App() {
-  return <div className="App">这是React Demo工程</div>;
+  return (
+    <div className="app">
+      <h1 className="text">Hello Webpack</h1>
+    </div>
+  );
 }
 
 export default App;
