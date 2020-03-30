@@ -5,8 +5,12 @@
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=local webpack-dev-server --config config/webpack.config.dev.js --progress --color --debug",
-    "build:dev": "cross-env NODE_ENV=dev webpack --config config/webpack.config.prod.js --progress --color --debug",
+    "build:dev": "webpack --config config/webpack.config.prod.js",
     "build:qa": "cross-env NODE_ENV=qa webpack --config config/webpack.config.prod.js --progress --color  --debug",
     "build:prod": "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js --progress --color"
+  },
+  "devDependencies": {
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
   }
 }
