@@ -7,9 +7,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(base, {
   mode: 'development',
-  output: {
-    filename: 'js/[name].[hash:8].js'
-  },
   devServer: {
     contentBase: paths.OUTPUT_DIR,
     open: true,

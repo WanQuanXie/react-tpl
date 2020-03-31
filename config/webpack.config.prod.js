@@ -8,9 +8,6 @@ const base = require('./webpack.config.base.js');
 
 module.exports = merge(base, {
   mode: 'production',
-  output: {
-    filename: 'js/[name].[contenthash:8].js'
-  },
   optimization: {
     minimizer: [new UglifyJsPlugin()],
     // runtimeChunk: true,
