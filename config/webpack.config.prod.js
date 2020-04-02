@@ -8,6 +8,9 @@ const base = require('./webpack.config.base.js');
 
 module.exports = merge(base, {
   mode: 'production',
+  output: {
+    filename: 'js/[name].[chunkhash:8].js'
+  },
   optimization: {
     minimizer: [new UglifyJsPlugin()],
     // runtimeChunk: true,
@@ -61,7 +64,19 @@ module.exports = merge(base, {
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'public/index.html'
+      template: 'public/index.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
+      }
     })
   ]
 });
