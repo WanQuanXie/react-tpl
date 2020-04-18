@@ -68,39 +68,14 @@ module.exports = merge(base, {
       {
         test: /\.less$/,
         include: /node_modules/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              // 开启css module
-              modules: {
-                localIdentName: '[path][name]__[local]--[hash:base64:5]',
-              },
-            },
-          },
-          'postcss-loader',
-          'less-loader',
-        ],
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'],
       },
       // 为避免有些第三方库提供的 CSS 没有做浏览器兼容性处理，在加载 node_moduels 中的 CSS 之前还要使用 postcss-loader 再统一处理一遍，
       // 以确保所有进入生产环境的 CSS 都经过了相应的浏览器兼容性处理
       {
         test: /\.css$/,
         include: /node_modules/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              // 开启css module
-              modules: {
-                localIdentName: '[path][name]__[local]--[hash:base64:5]',
-              },
-            },
-          },
-          'postcss-loader',
-        ],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
     ],
   },
