@@ -15,6 +15,7 @@ const prodWebpackConfig = merge(base, {
     filename: 'js/[name].[chunkhash:8].js',
   },
   optimization: {
+    usedExports: true,
     minimizer: [
       new TerserPlugin({
         parallel: true,
@@ -50,12 +51,16 @@ const prodWebpackConfig = merge(base, {
       {
         test: /\.less$/,
         exclude: /node_modules/,
+        // 对该类型的文件关闭 Tree shaking
+        sideEffects: true,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'],
       },
       // 专门针对 node_module 中的 less 处理
       {
         test: /\.less$/,
         include: /node_modules/,
+        // 对该类型的文件关闭 Tree shaking
+        sideEffects: true,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'],
       },
       // 为避免有些第三方库提供的 CSS 没有做浏览器兼容性处理，在加载 node_moduels 中的 CSS 之前还要使用 postcss-loader 再统一处理一遍，
@@ -63,6 +68,8 @@ const prodWebpackConfig = merge(base, {
       {
         test: /\.css$/,
         include: /node_modules/,
+        // 对该类型的文件关闭 Tree shaking
+        sideEffects: true,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
     ],

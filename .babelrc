@@ -1,13 +1,52 @@
+// 分环境配置Babel，避免因在测试环境中关闭 Babel 的模块转换功能而导致 Jest 等测试框架运行出错
 {
-    "presets": [
+  "env": {
+    "development": {
+      "presets": [
         [
-            "@babel/preset-env",
-            {
-                // 根据代码逻辑中用到的 ES6+语法进行方法的导入，而不是全部导入
-                "useBuiltIns": "usage",
-                "corejs": 3
-            }
+          "@babel/preset-env",
+          {
+            // 根据代码逻辑中用到的 ES6+语法进行方法的导入，而不是全部导入
+            "useBuiltIns": "usage",
+            "corejs": 3,
+            // 关闭 Babel 的模块转换功能，保留原本的 ES6 模块化语法
+            "modules": false
+          }
         ],
         "@babel/preset-react"
-    ]
+      ]
+    },
+    "production": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            // 根据代码逻辑中用到的 ES6+语法进行方法的导入，而不是全部导入
+            "useBuiltIns": "usage",
+            "corejs": 3,
+            // 关闭 Babel 的模块转换功能，保留原本的 ES6 模块化语法
+            "modules": false
+          }
+        ],
+        "@babel/preset-react"
+      ]
+    },
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            // 根据代码逻辑中用到的 ES6+语法进行方法的导入，而不是全部导入
+            "useBuiltIns": "usage",
+            "corejs": 3,
+            "modules": "commonjs"
+          }
+        ],
+        "@babel/preset-react"
+      ]
+      // "plugins": [
+      //   "transform-es2015-modules-commonjs" // Not sure this is required, but I had added it anyway
+      // ]
+    }
+  }
 }
