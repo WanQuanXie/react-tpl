@@ -1,11 +1,17 @@
 import React from 'react';
-import style from './app.less';
+import { Provider } from 'react-redux';
+import { createBrowserHistory } from 'history';
+
+import createStore from './redux/createStore';
+import Router from './route/router';
+
+const { store, history } = createStore(createBrowserHistory());
 
 function App() {
   return (
-    <div className={style.app}>
-      <h1 className="text">Hello Webpack</h1>
-    </div>
+    <Provider store={store}>
+      <Router history={history} />
+    </Provider>
   );
 }
 

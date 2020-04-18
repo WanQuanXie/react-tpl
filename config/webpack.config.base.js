@@ -9,12 +9,20 @@ module.exports = {
   entry: {
     app: './src/index.js',
     // 配置 code spliting，将这些公共的复用代码最终抽取成一个 chunk，单独打包出来
-    framework: ['react', 'react-dom'],
+    framework: [
+      'react',
+      'react-dom',
+      'redux',
+      'react-redux',
+      'react-router-dom',
+      'connected-react-router',
+      'history',
+    ],
   },
   resolve: {
     // import导入时省略后缀
     // 注意：尽可能的减少后缀尝试的可能性
-    extensions: ['.js', '.jsx', '.less', '.css', '.json'],
+    extensions: ['.js', '.jsx'],
     // 优化模块查找路径
     modules: [
       // 设置模块导入规则，import/require时会直接在这些目录找文件
