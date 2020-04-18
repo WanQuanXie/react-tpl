@@ -7,7 +7,7 @@ threadLoader.warmup({}, ['babel-loader']);
 
 module.exports = {
   entry: {
-    app: './src/index.js',
+    app: './src/index',
     // 配置 code spliting，将这些公共的复用代码最终抽取成一个 chunk，单独打包出来
     framework: [
       'react',

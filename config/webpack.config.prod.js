@@ -6,8 +6,9 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
-const smp = new SpeedMeasurePlugin();
 const base = require('./webpack.config.base.js');
+
+const smp = new SpeedMeasurePlugin();
 
 const prodWebpackConfig = merge(base, {
   mode: 'production',
