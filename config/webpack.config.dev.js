@@ -11,6 +11,29 @@ module.exports = merge(base, {
   output: {
     filename: 'js/[name].[hash:8].js',
   },
+  // 从配置的 Entry 文件出发，递归解析出 Entry 文件所依赖的文件，
+  // 把这些依赖的文件加入到监听列表
+  // 而不是直接监听项目目录下的所有文件
+  // 只有在开启监听模式时，watchOptions 才有意义
+  // 默认为 false，也就是不开启
+  watch: true,
+  watchOptions: {
+    // 不监听的文件或文件夹，支持正则匹配
+    // 默认为空
+    ignored: /node_modules/,
+    // 在 Webpack 中监听一个文件发生变化的原理是定时的不停的去获取文件的最后编辑时间，
+    // 每次都存下最新的最后编辑时间，如果发现当前获取的和最后一次保存的最后编辑时间不一致，
+    // 就认为该文件发生了变化。
+    // poll 就是用于控制定时检查的周期，具体含义是每隔多少毫秒检查一次
+    // 默认每隔 1000 毫秒询问一次
+    poll: 1000,
+    // 监听到文件发生变化时，webpack 并不会立刻告诉监听者，
+    // 而是先缓存起来，收集一段时间的变化后，再一次性告诉监听者
+    // aggregateTimeout 就是用于配置这个等待时间，
+    // 目的是防止文件更新太快导致重新编译频率太高，让程序构建卡死
+    // 默认为 300ms
+    aggregateTimeout: 300,
+  },
   devServer: {
     contentBase: paths.OUTPUT_DIR,
     open: true,
