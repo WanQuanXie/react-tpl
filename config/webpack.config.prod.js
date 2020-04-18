@@ -104,6 +104,7 @@ const prodWebpackConfig = merge(base, {
     }),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
+      // eslint-disable-next-line
       cssProcessor: require('cssnano'),
       cssProcessorPluginOptions: {
         preset: ['default', { discardComments: { removeAll: true } }]

@@ -9,15 +9,7 @@ module.exports = {
   entry: {
     app: './src/index',
     // 配置 code spliting，将这些公共的复用代码最终抽取成一个 chunk，单独打包出来
-    framework: [
-      'react',
-      'react-dom',
-      'redux',
-      'react-redux',
-      'react-router-dom',
-      'connected-react-router',
-      'history'
-    ]
+    framework: ['react', 'react-dom', 'redux', 'react-redux', 'react-router-dom', 'connected-react-router', 'history']
   },
   resolve: {
     // import导入时省略后缀
