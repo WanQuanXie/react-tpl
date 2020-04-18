@@ -19,6 +19,7 @@ module.exports = {
       // 设置模块导入规则，import/require时会直接在这些目录找文件
       // 可以指明存放第三方模块的绝对路径，以减少寻找，
       // 默认 node_modules
+      paths.COMPONENTS,
       paths.SOURCE_DIR,
       paths.NODE_MODULES_DIR,
     ],
