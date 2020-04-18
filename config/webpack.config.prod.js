@@ -53,7 +53,20 @@ const prodWebpackConfig = merge(base, {
         exclude: /node_modules/,
         // 对该类型的文件关闭 Tree shaking
         sideEffects: true,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              // 开启css module
+              modules: {
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              },
+            },
+          },
+          'postcss-loader',
+          'less-loader',
+        ],
       },
       // 专门针对 node_module 中的 less 处理
       {
@@ -61,7 +74,20 @@ const prodWebpackConfig = merge(base, {
         include: /node_modules/,
         // 对该类型的文件关闭 Tree shaking
         sideEffects: true,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              // 开启css module
+              modules: {
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              },
+            },
+          },
+          'postcss-loader',
+          'less-loader',
+        ],
       },
       // 为避免有些第三方库提供的 CSS 没有做浏览器兼容性处理，在加载 node_moduels 中的 CSS 之前还要使用 postcss-loader 再统一处理一遍，
       // 以确保所有进入生产环境的 CSS 都经过了相应的浏览器兼容性处理
@@ -70,7 +96,19 @@ const prodWebpackConfig = merge(base, {
         include: /node_modules/,
         // 对该类型的文件关闭 Tree shaking
         sideEffects: true,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              // 开启css module
+              modules: {
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              },
+            },
+          },
+          'postcss-loader',
+        ],
       },
     ],
   },
@@ -83,6 +121,8 @@ const prodWebpackConfig = merge(base, {
       },
     }),
     new MiniCssExtractPlugin({
+      // 针对 Tree Shaking 的设置
+      esModule: true,
       filename: 'css/[name].[contenthash].css',
       chunkFilename: 'css/[id].[contenthash].css',
     }),
