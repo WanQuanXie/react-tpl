@@ -8,5 +8,6 @@ module.exports = {
   LOGO_PATH: path.resolve(__dirname, '../public/logo.png'),
   SW_PATH: path.resolve(__dirname, '../public/workboxServiceWorker.js'),
   HTML_TEMPLATE_PATH: path.resolve(__dirname, '../public/index.html'),
-  PUBLIC_PATH: process.env.PUBLIC_PATH || '/'
+  PUBLIC_PATH: process.env.PUBLIC_PATH || '/',
+  cacheDirectory: path.join(__dirname, '../.cache/hard-source/[confighash]'),
 };

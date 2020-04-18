@@ -16,7 +16,7 @@ module.exports = {
         use: [
           // 创建一个 js worker 池，当项目规模较小时，建议注释掉 thread-loader，关闭该多线程打包设置
           'thread-loader',
-          'babel-loader',
+          'babel-loader?cacheDirectory=true',
         ],
         exclude: /node_modules/,
       },
@@ -43,4 +43,5 @@ module.exports = {
       },
     ],
   },
+  plugins: [],
 };
