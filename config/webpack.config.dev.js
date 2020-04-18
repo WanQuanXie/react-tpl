@@ -9,7 +9,7 @@ module.exports = merge(base, {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   output: {
-    filename: 'js/[name].[hash:8].js'
+    filename: 'js/[name].[hash:8].js',
   },
   devServer: {
     contentBase: paths.OUTPUT_DIR,
@@ -17,25 +17,25 @@ module.exports = merge(base, {
     port: 9000,
     compress: true,
     inline: true, // 设置热更新刷新模式为 inline
-    hot: true
+    hot: true,
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
-      }
-    ]
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'],
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'public/index.html',
-      hash: false
+      hash: false,
     }),
-    new webpack.HotModuleReplacementPlugin()
-  ]
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 });

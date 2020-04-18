@@ -4,12 +4,14 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const smp = new SpeedMeasurePlugin();
 const base = require('./webpack.config.base.js');
 
-module.exports = merge(base, {
+const prodWebpackConfig = merge(base, {
   mode: 'production',
   output: {
-    filename: 'js/[name].[chunkhash:8].js'
+    filename: 'js/[name].[chunkhash:8].js',
   },
   optimization: {
     minimizer: [new UglifyJsPlugin()],
@@ -25,42 +27,42 @@ module.exports = merge(base, {
         framework: {
           test: 'framework',
           name: 'framework',
-          enforce: true
+          enforce: true,
         },
         vendors: {
           priority: -10,
           test: /node_modules/,
           name: 'vendor',
-          enforce: true
-        }
-      }
-    }
+          enforce: true,
+        },
+      },
+    },
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.less$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader']
-      }
-    ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'],
+      },
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
-      chunkFilename: 'css/[id].[contenthash].css'
+      chunkFilename: 'css/[id].[contenthash].css',
     }),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessor: require('cssnano'),
       cssProcessorPluginOptions: {
-        preset: ['default', { discardComments: { removeAll: true } }]
+        preset: ['default', { discardComments: { removeAll: true } }],
       },
-      canPrint: true
+      canPrint: true,
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -75,8 +77,10 @@ module.exports = merge(base, {
         keepClosingSlash: true,
         minifyJS: true,
         minifyCSS: true,
-        minifyURLs: true
-      }
-    })
-  ]
+        minifyURLs: true,
+      },
+    }),
+  ],
 });
+
+module.exports = smp.wrap(prodWebpackConfig);
