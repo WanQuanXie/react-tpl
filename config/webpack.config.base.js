@@ -1,4 +1,5 @@
 const threadLoader = require('thread-loader');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const paths = require('./paths');
 
 // thread-loader 预热
@@ -66,5 +67,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [],
+  plugins: [new CopyWebpackPlugin([{ from: paths.FAVICON_ICO_PATH }])],
 };

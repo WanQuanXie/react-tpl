@@ -1,9 +1,9 @@
 import React from 'react';
-import './app.less';
+import style from './app.less';
 
 function App() {
   return (
-    <div className="app">
+    <div className={style.app}>
       <h1 className="text">Hello Webpack</h1>
     </div>
   );
