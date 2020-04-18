@@ -27,6 +27,9 @@ module.exports = {
       '@': paths.SOURCE_DIR,
       '@components': paths.COMPONENTS,
     },
+    // 有一些第三方模块会针对不同环境提供几分代码，以下为优先采用 ES6 的那份代码的配置方式
+    // 默认为：['browser', 'main']
+    mainFields: ['jsnext:main', 'browser', 'main'],
   },
   module: {
     rules: [
