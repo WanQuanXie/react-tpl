@@ -1,9 +1,8 @@
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const base = require('./webpack.config.base');
-const paths = require('./paths');
-
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const paths = require('./paths');
 
 module.exports = merge(base, {
   mode: 'development',
@@ -39,7 +38,9 @@ module.exports = merge(base, {
     open: true,
     port: 9000,
     compress: true,
-    inline: true, // 设置热更新刷新模式为 inline
+    // 默认开启 devServer.inline ）采用往开发的网页中注入代理客户端代码，通过代理客户端去刷新整个页面的原理实现网页的自动刷新。
+    // 但它会向每一个 Chunk 包都注入一个代理服务器，当项目需要输出的 Chunk 有很多个时，这会导致构建缓慢
+    inline: true,
     hot: true,
   },
   module: {
