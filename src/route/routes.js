@@ -7,8 +7,8 @@ const routes = [
     path: '/',
     exact: true,
     title: '首页',
-    component: Home,
-  },
+    component: Home
+  }
 ];
 
 export default routes;

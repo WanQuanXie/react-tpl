@@ -10,5 +10,5 @@ module.exports = {
   HTML_TEMPLATE_PATH: path.resolve(__dirname, '../public/index.html'),
   PUBLIC_PATH: process.env.PUBLIC_PATH || '/',
   cacheDirectory: path.join(__dirname, '../.cache/hard-source/[confighash]'),
-  COMPONENTS: path.resolve(__dirname, `../src/components/`),
+  COMPONENTS: path.resolve(__dirname, `../src/components/`)
 };

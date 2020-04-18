@@ -12,15 +12,15 @@ const base = require('./webpack.config.base.js');
 const prodWebpackConfig = merge(base, {
   mode: 'production',
   output: {
-    filename: 'js/[name].[chunkhash:8].js',
+    filename: 'js/[name].[chunkhash:8].js'
   },
   optimization: {
     usedExports: true,
     minimizer: [
       new TerserPlugin({
         parallel: true,
-        cache: true,
-      }),
+        cache: true
+      })
     ],
     // runtimeChunk: true,
     splitChunks: {
@@ -34,16 +34,16 @@ const prodWebpackConfig = merge(base, {
         framework: {
           test: 'framework',
           name: 'framework',
-          enforce: true,
+          enforce: true
         },
         vendors: {
           priority: -10,
           test: /node_modules/,
           name: 'vendor',
-          enforce: true,
-        },
-      },
-    },
+          enforce: true
+        }
+      }
+    }
   },
   module: {
     rules: [
@@ -60,13 +60,13 @@ const prodWebpackConfig = merge(base, {
             options: {
               // 开启css module
               modules: {
-                localIdentName: '[path][name]__[local]--[hash:base64:5]',
-              },
-            },
+                localIdentName: '[path][name]__[local]--[hash:base64:5]'
+              }
+            }
           },
           'postcss-loader',
-          'less-loader',
-        ],
+          'less-loader'
+        ]
       },
       // 专门针对 node_module 中的 less 处理
       {
@@ -74,7 +74,7 @@ const prodWebpackConfig = merge(base, {
         include: /node_modules/,
         // 对该类型的文件关闭 Tree shaking
         sideEffects: true,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader']
       },
       // 为避免有些第三方库提供的 CSS 没有做浏览器兼容性处理，在加载 node_moduels 中的 CSS 之前还要使用 postcss-loader 再统一处理一遍，
       // 以确保所有进入生产环境的 CSS 都经过了相应的浏览器兼容性处理
@@ -83,31 +83,31 @@ const prodWebpackConfig = merge(base, {
         include: /node_modules/,
         // 对该类型的文件关闭 Tree shaking
         sideEffects: true,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
-      },
-    ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
+      }
+    ]
   },
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
       // 定义 NODE_ENV 环境变量为 production
       'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
+        NODE_ENV: JSON.stringify('production')
+      }
     }),
     new MiniCssExtractPlugin({
       // 针对 Tree Shaking 的设置
       esModule: true,
       filename: 'css/[name].[contenthash].css',
-      chunkFilename: 'css/[id].[contenthash].css',
+      chunkFilename: 'css/[id].[contenthash].css'
     }),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessor: require('cssnano'),
       cssProcessorPluginOptions: {
-        preset: ['default', { discardComments: { removeAll: true } }],
+        preset: ['default', { discardComments: { removeAll: true } }]
       },
-      canPrint: true,
+      canPrint: true
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -122,10 +122,10 @@ const prodWebpackConfig = merge(base, {
         keepClosingSlash: true,
         minifyJS: true,
         minifyCSS: true,
-        minifyURLs: true,
-      },
-    }),
-  ],
+        minifyURLs: true
+      }
+    })
+  ]
 });
 
 module.exports = smp.wrap(prodWebpackConfig);

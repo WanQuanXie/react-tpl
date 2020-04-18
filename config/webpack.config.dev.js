@@ -8,7 +8,7 @@ module.exports = merge(base, {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   output: {
-    filename: 'js/[name].[hash:8].js',
+    filename: 'js/[name].[hash:8].js'
   },
   // 从配置的 Entry 文件出发，递归解析出 Entry 文件所依赖的文件，
   // 把这些依赖的文件加入到监听列表
@@ -31,7 +31,7 @@ module.exports = merge(base, {
     // aggregateTimeout 就是用于配置这个等待时间，
     // 目的是防止文件更新太快导致重新编译频率太高，让程序构建卡死
     // 默认为 300ms
-    aggregateTimeout: 300,
+    aggregateTimeout: 300
   },
   devServer: {
     contentBase: paths.OUTPUT_DIR,
@@ -41,7 +41,7 @@ module.exports = merge(base, {
     // 默认开启 devServer.inline ）采用往开发的网页中注入代理客户端代码，通过代理客户端去刷新整个页面的原理实现网页的自动刷新。
     // 但它会向每一个 Chunk 包都注入一个代理服务器，当项目需要输出的 Chunk 有很多个时，这会导致构建缓慢
     inline: true,
-    hot: true,
+    hot: true
   },
   module: {
     rules: [
@@ -56,40 +56,40 @@ module.exports = merge(base, {
             options: {
               // 开启css module
               modules: {
-                localIdentName: '[path][name]__[local]--[hash:base64:5]',
-              },
-            },
+                localIdentName: '[path][name]__[local]--[hash:base64:5]'
+              }
+            }
           },
           'postcss-loader',
-          'less-loader',
-        ],
+          'less-loader'
+        ]
       },
       // 专门针对 node_module 中的 less 处理
       {
         test: /\.less$/,
         include: /node_modules/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
       },
       // 为避免有些第三方库提供的 CSS 没有做浏览器兼容性处理，在加载 node_moduels 中的 CSS 之前还要使用 postcss-loader 再统一处理一遍，
       // 以确保所有进入生产环境的 CSS 都经过了相应的浏览器兼容性处理
       {
         test: /\.css$/,
         include: /node_modules/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
-      },
-    ],
+        use: ['style-loader', 'css-loader', 'postcss-loader']
+      }
+    ]
   },
   plugins: [
     new webpack.DefinePlugin({
       // 定义 NODE_ENV 环境变量为 development
       'process.env': {
-        NODE_ENV: JSON.stringify('development'),
-      },
+        NODE_ENV: JSON.stringify('development')
+      }
     }),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
-      hash: false,
+      hash: false
     }),
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+    new webpack.HotModuleReplacementPlugin()
+  ]
 });

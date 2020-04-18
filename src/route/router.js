@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import routes from './routes';
 
 const propTypes = {
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 const Router = ({ history }) => (

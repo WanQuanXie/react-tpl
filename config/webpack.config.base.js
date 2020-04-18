@@ -16,8 +16,8 @@ module.exports = {
       'react-redux',
       'react-router-dom',
       'connected-react-router',
-      'history',
-    ],
+      'history'
+    ]
   },
   resolve: {
     // import导入时省略后缀
@@ -30,16 +30,16 @@ module.exports = {
       // 默认 node_modules
       paths.COMPONENTS,
       paths.SOURCE_DIR,
-      paths.NODE_MODULES_DIR,
+      paths.NODE_MODULES_DIR
     ],
     // import 导入时别名，减少耗时的递归解析操作
     alias: {
       '@': paths.SOURCE_DIR,
-      '@components': paths.COMPONENTS,
+      '@components': paths.COMPONENTS
     },
     // 有一些第三方模块会针对不同环境提供几分代码，以下为优先采用 ES6 的那份代码的配置方式
     // 默认为：['browser', 'main']
-    mainFields: ['jsnext:main', 'browser', 'main'],
+    mainFields: ['jsnext:main', 'browser', 'main']
   },
   module: {
     rules: [
@@ -48,9 +48,9 @@ module.exports = {
         use: [
           // 创建一个 js worker 池，当项目规模较小时，建议注释掉 thread-loader，关闭该多线程打包设置
           'thread-loader',
-          'babel-loader?cacheDirectory=true',
+          'babel-loader?cacheDirectory=true'
         ],
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.(jpe?g|png|gif)$/,
@@ -59,9 +59,9 @@ module.exports = {
           options: {
             name: '[name].[ext]',
             outputPath: 'images/',
-            limit: 8 * 1024, // 8Kb
-          },
-        },
+            limit: 8 * 1024 // 8Kb
+          }
+        }
       },
       {
         test: /\.(eot|ttf|svg|woff|woff2)$/,
@@ -69,11 +69,11 @@ module.exports = {
           loader: 'file-loader',
           options: {
             name: '[name]_[hash:8].[ext]',
-            outputPath: 'font/',
-          },
-        },
-      },
-    ],
+            outputPath: 'font/'
+          }
+        }
+      }
+    ]
   },
-  plugins: [new CopyWebpackPlugin([{ from: paths.FAVICON_ICO_PATH }])],
+  plugins: [new CopyWebpackPlugin([{ from: paths.FAVICON_ICO_PATH }])]
 };
