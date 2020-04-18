@@ -67,6 +67,12 @@ module.exports = merge(base, {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      // 定义 NODE_ENV 环境变量为 development
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+      },
+    }),
     new HtmlWebpackPlugin({
       template: 'public/index.html',
       hash: false,
