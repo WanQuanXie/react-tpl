@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -6,6 +7,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+const paths = require('./paths');
 const base = require('./webpack.config.base.js');
 
 const smp = new SpeedMeasurePlugin();
@@ -112,8 +115,10 @@ const prodWebpackConfig = merge(base, {
       canPrint: true
     }),
     new HtmlWebpackPlugin({
+      title: 'React TPL',
       filename: 'index.html',
-      template: 'public/index.html',
+      template: 'public/index.ejs',
+      IS_SEO_ENABLED: true,
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -126,6 +131,31 @@ const prodWebpackConfig = merge(base, {
         minifyCSS: true,
         minifyURLs: true
       }
+    }),
+    // 配置生成 manifest.json 文件的规则
+    new WebpackPwaManifest({
+      name: 'React Progressive Web App',
+      short_name: 'ReactPWA',
+      description: '基于React的PWA应用',
+      orientation: 'natural',
+      display: 'standalone',
+      start_url: '.',
+      fingerprints: false,
+      background_color: '#ffffff',
+      ios: true,
+      icons: [
+        {
+          src: paths.ICON_PATH,
+          sizes: [152, 167, 180], // multiple sizes
+          destination: path.join('icons', 'ios'),
+          ios: true
+        },
+        {
+          src: paths.ICON_PATH,
+          sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+          destination: path.join('icons', 'android')
+        }
+      ]
     })
   ]
 });

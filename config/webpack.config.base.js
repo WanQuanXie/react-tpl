@@ -1,5 +1,7 @@
 const threadLoader = require('thread-loader');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { InjectManifest } = require('workbox-webpack-plugin');
+
 const paths = require('./paths');
 
 // thread-loader 预热
@@ -67,5 +69,13 @@ module.exports = {
       }
     ]
   },
-  plugins: [new CopyWebpackPlugin([{ from: paths.FAVICON_ICO_PATH }])]
+  plugins: [
+    new CopyWebpackPlugin([{ from: paths.FAVICON_ICO_PATH }]),
+    new InjectManifest({
+      swSrc: paths.SW_PATH,
+      swDest: 'sw.js',
+      // 当文件尺寸大于指定大小时，将不会将其加入到预缓存列表中（单位为 byte，默认值为 2097152）
+      maximumFileSizeToCacheInBytes: 1024 * 1024 * 5
+    })
+  ]
 };

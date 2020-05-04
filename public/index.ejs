@@ -9,8 +9,14 @@
       name="description"
       content="This is an example of a React SPA description. This will often show up in search results."
     />
+    <!-- 根据 webpack 配置来决定应用是否可以被搜索引擎检索。更多信息请查阅：https://developers.google.cn/search/reference/robots_meta_tag?hl=zh-cn -->
+    <% if (htmlWebpackPlugin.options.IS_SEO_ENABLED) { %>
+    <meta name="robots" content="index, follow" />
+    <% } else { %>
+    <meta name="robots" content="noindex, nofollow" />
+    <% } %>
 
-    <title>React Template</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="manifest" href="./manifest.json" />
