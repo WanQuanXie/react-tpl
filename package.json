@@ -35,7 +35,7 @@
     "lint-staged": ">=10",
     "mini-css-extract-plugin": "^1.4.0",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
-    "postcss": "^8.2.10",
+    "postcss": "^8.2.13",
     "postcss-loader": "^5.2.0",
     "prettier": "2.2.1",
     "speed-measure-webpack-plugin": "^1.4.2",
